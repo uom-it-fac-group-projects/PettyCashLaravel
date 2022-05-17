@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PettyCashController;
+use App\Http\Controllers\ImprestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,5 @@ use App\Http\Controllers\PettyCashController;
 Route::get('/', [PettyCashController::class,'index']);
 Route::post('pettycash/store', [PettyCashController::class,'store']);
 Route::get('delete/{id}', [PettyCashController::class,'delete']);
+
+Route::post('imprest/store', [ImprestController::class,'store']);

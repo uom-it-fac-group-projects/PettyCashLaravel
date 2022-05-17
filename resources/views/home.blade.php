@@ -19,14 +19,38 @@
         @endif
 
         {{-- Show success message --}}
-        @if (session('deleted'))
+        @if (session('error'))
         <div class="alert alert-danger">
-            {{ session('deleted') }}
+            {{ session('error') }}
         </div>
         @endif
     </div>
+
     <div class="row">
     <div class="col-md-4" style="margin-top: 20px;"> 
+        {{-- submit form data to the store function as defined in the route --}}
+        @if($imprest_amount != null)
+        <div class="container w-75 p-4 mb-3" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
+            <div class="text-center">Imprest Amount</div>
+            <div class="text-success text-center" style="font-size: 30px">{{$imprest_amount}}</div>
+
+        </div>
+        @else
+        
+    <h5 style="text-align: center">Enter the fixed imprest amount</h5>
+        <form class="container w-75 p-4 mb-3"  action="/imprest/store" method="POST" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
+            @csrf
+            <div class="mb-3">
+              <label for="imprest_amount" class="form-label">Amount</label>
+              <input type="number" class="form-control" name="imprest_amount" id="imprest_amount"  aria-describedby="emailHelp">
+              <span style="color: red">@error('amount')
+                {{$message}}
+            @enderror</span>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+          </form>
+        @endif
+        
         <h5 style="text-align: center">Enter transaction details</h5>
         {{-- submit form data to the store function as defined in the route --}}
         <form class="container w-75 p-4"  action="/pettycash/store" method="POST" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
@@ -52,6 +76,9 @@
               <span style="color: red">@error('amount')
                 {{$message}}
             @enderror</span>
+            
+
+
             </div>
             <div class="mb-3">
                 <label for="type" class="form-label">Type</label>
@@ -67,8 +94,10 @@
                     {{$message}}
                 @enderror</span>
             </div>
-
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
+            @if($imprest_amount == null) 
+                <span class="text-danger">Please enter imprest amount to continue</span>
+            @endif
+            <button type="submit" class="btn btn-primary w-100" <?php if ($imprest_amount == null){ ?> disabled <?php   } ?> >Submit</button>
           </form>
     </div>
     <div class="col-md-8" style="margin-top: 20px;">
@@ -143,6 +172,28 @@
               </tr>
             </tbody>
           </table>
+          
+        <div class="container w-75 p-4 mb-3 row" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
+            <div class="col-md-10">
+                <div> Start the current accounting period with imprest amount</div>
+                <div> Total of petty cash payments during the accounting period</div>
+                <hr style="width: 100%;">
+                <div> Cash held at the end of the accounting period </div>
+                <div> Amount needed to restore the imprest amount </div>
+                <hr style="width: 100%;">
+                <div> Cash at the start of the next accounting period </div>
+            </div>
+            <div class="col-md-2" >
+                <div> {{$imprest_amount}} </div>
+                <div> {{$amountTotal}} </div>
+                <hr style="width: 50px;">
+                <div> {{$imprest_amount - $amountTotal}} </div>
+                <div> {{$amountTotal}} </div>
+                <hr style="width: 50px;">
+                <div> {{$imprest_amount}} </div>
+            </div>
+
+        </div>
     </div>
 </div>
 

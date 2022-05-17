@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\PettyCash;
+use App\Models\Imprest;
 
 
 class PettyCashController extends Controller
@@ -18,7 +19,15 @@ class PettyCashController extends Controller
         $postageTotal = PettyCash::where('type', 'postage')->sum('amount');
         $othersTotal = PettyCash::where('type', 'others')->sum('amount');
 
-        return view('home',compact('pettycash', 'amountTotal', 'stationaryTotal', 'travellingTotal', 'postageTotal', 'othersTotal'));
+        $imprest_amount = Imprest::select('imprest_amount')->first()->imprest_amount;
+        
+        // if($imprest.isEmpty()) {
+        //     $imprest_amount = null;
+        // } else {
+        //     $imprest_amount = $imprest->imprest_amount;
+        // }
+
+        return view('home',compact('pettycash', 'amountTotal', 'stationaryTotal', 'travellingTotal', 'postageTotal', 'othersTotal', 'imprest_amount'));
     }
 
     public function store(Request $request)
@@ -30,10 +39,18 @@ class PettyCashController extends Controller
             'type' => 'required',
         ]);
         $input = $request->all();
+        $totalAmount = PettyCash::sum('amount');
+        $imprest_amount = 50000;
 
-        PettyCash::create($input);
+        $estimated_total =  $totalAmount + $request->amount;
 
-        return redirect('/')->with('status', 'Transaction added successfully');
+        if($estimated_total <= $imprest_amount) {
+            PettyCash::create($input);
+            return redirect('/')->with('status', 'Transaction added successfully');
+        } else {
+            return redirect('/')->with('error', 'Total amount should not exceed the imprest amount');
+        }
+
     }
 
     public function delete($id)
@@ -41,6 +58,6 @@ class PettyCashController extends Controller
         $transaction = PettyCash::find($id);
         $transaction->delete();
 
-        return redirect('/')->with('deleted', 'Record has been deleted');
+        return redirect('/')->with('error', 'Record has been deleted');
     }
 }
