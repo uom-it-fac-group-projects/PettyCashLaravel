@@ -36,7 +36,7 @@
         </div>
         @else
         
-    <h5 style="text-align: center">Enter the fixed imprest amount</h5>
+    <h5 style="text-align: center">Enter the imprest amount</h5>
         <form class="container w-75 p-4 mb-3"  action="/imprest/store" method="POST" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
             @csrf
             <div class="mb-3">
@@ -100,7 +100,7 @@
           </form>
     </div>
     <div class="col-md-8" style="margin-top: 20px;">
-        <h5 style="text-align: center">Petty Cash Journal</h5>
+        <h4 style="text-align: center">Petty Cash Journal</h4>
         <table class="table table-bordered container">
             <thead>
               <tr>
@@ -182,7 +182,7 @@
 
             <div class="col-md-6" >
                 <div class="container w-75 p-4 mb-3 text-center" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
-                    <div >Amount needed to restore imprest</div>
+                    <div >Petty Cash Float</div>
                     <div class="text-success " style="font-size: 30px">{{$amountTotal}}</div>
                 </div>
             </div>
