@@ -30,10 +30,9 @@
     <div class="col-md-4" style="margin-top: 20px;"> 
         {{-- submit form data to the store function as defined in the route --}}
         @if($imprest_amount != null)
-        <div class="container w-75 p-4 mb-3" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
-            <div class="text-center">Imprest Amount</div>
-            <div class="text-success text-center" style="font-size: 30px">{{$imprest_amount}}</div>
-
+        <div class="container w-75 p-4 mb-3 text-center" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
+            <div >Imprest Amount</div>
+            <div class="text-success " style="font-size: 30px">{{$imprest_amount}}</div>
         </div>
         @else
         
@@ -173,28 +172,24 @@
             </tbody>
           </table>
           
-        <div class="container w-75 p-4 mb-3 row" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
-            <div class="col-md-10">
-                <div> Start the current accounting period with imprest amount</div>
-                <div> Total of petty cash payments during the accounting period</div>
-                <hr style="width: 100%;">
-                <div> Cash held at the end of the accounting period </div>
-                <div> Amount needed to restore the imprest amount </div>
-                <hr style="width: 100%;">
-                <div> Cash at the start of the next accounting period </div>
-            </div>
-            <div class="col-md-2" >
-                <div> {{$imprest_amount}} </div>
-                <div> {{$amountTotal}} </div>
-                <hr style="width: 50px;">
-                <div> {{$imprest_amount - $amountTotal}} </div>
-                <div> {{$amountTotal}} </div>
-                <hr style="width: 50px;">
-                <div> {{$imprest_amount}} </div>
+        <div class="container w-100 p-4 mb-3 row" style=" border-radius: 15px;">
+            <div class="col-md-6">
+                <div class="container w-75 p-4 mb-3 text-center" style="background-color: rgb(232, 232, 232); border-radius: 15px;margin: 5px;">
+                    <div >Balance</div>
+                    <div class="text-success " style="font-size: 30px">{{$imprest_amount - $amountTotal}}</div>
+                </div>
             </div>
 
+            <div class="col-md-6" >
+                <div class="container w-75 p-4 mb-3 text-center" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
+                    <div >Amount needed to restore imprest</div>
+                    <div class="text-success " style="font-size: 30px">{{$amountTotal}}</div>
+                </div>
+            </div>
         </div>
-    </div>
+        <div style="position: absolute;right: 0px;">
+            <a href="/db/clear"><div class="btn btn-primary"> Reset all </div></a>
+        </div>
 </div>
 
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>

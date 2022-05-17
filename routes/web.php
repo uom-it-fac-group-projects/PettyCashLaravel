@@ -25,3 +25,5 @@ Route::post('pettycash/store', [PettyCashController::class,'store']);
 Route::get('delete/{id}', [PettyCashController::class,'delete']);
 
 Route::post('imprest/store', [ImprestController::class,'store']);
+
+Route::get('db/clear', [PettyCashController::class,'deleteDB']);

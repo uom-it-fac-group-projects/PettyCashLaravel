@@ -19,7 +19,15 @@ class PettyCashController extends Controller
         $postageTotal = PettyCash::where('type', 'postage')->sum('amount');
         $othersTotal = PettyCash::where('type', 'others')->sum('amount');
 
-        $imprest_amount = Imprest::select('imprest_amount')->first()->imprest_amount;
+        $imprest = Imprest::select('imprest_amount')->first();
+
+        if($imprest == null) {
+            $imprest_amount = null;
+        }
+        else {
+            $imprest_amount = $imprest['imprest_amount'];
+        }
+        
         
         // if($imprest.isEmpty()) {
         //     $imprest_amount = null;
@@ -59,5 +67,13 @@ class PettyCashController extends Controller
         $transaction->delete();
 
         return redirect('/')->with('error', 'Record has been deleted');
+    }
+
+    public function deleteDB()
+    {
+        PettyCash::truncate();
+        Imprest::truncate();
+
+        return redirect('/')->with('error', 'Data has been reset');
     }
 }
