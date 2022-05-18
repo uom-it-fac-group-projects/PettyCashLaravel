@@ -115,7 +115,7 @@
         <table class="table table-bordered container" id="myTable">
             <thead>
               <tr>
-                <th scope="col" rowspan="2">Date</th>
+                <th scope="col" rowspan="2" style="width: 120px;">Date</th>
                 <th scope="col" rowspan="2">Description</th>
                 <th scope="col" rowspan="2">V/N</th>
                 <th scope="col" rowspan="2">Amount</th>
@@ -193,7 +193,7 @@
 
             <div class="col-md-6" >
                 <div class="container w-75 p-4 mb-3 text-center" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
-                    <div >Petty Cash Float</div>
+                    <div >Reimbursement Amount</div>
                     <div class="btn btn-success" id="showFloatBtn" style="font-size: 20px">Show</div>
                     <div class="text-success " id="floatValue" style="font-size: 30px">{{$amountTotal}}</div>
                 </div>
@@ -224,6 +224,7 @@
     
     <script>
         $(document).ready( function () {
+            console.log('hii');
             $("#floatValue").hide();
                 $('#myTable').DataTable(
                     {
