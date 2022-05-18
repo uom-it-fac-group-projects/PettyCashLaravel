@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('font-awesome-4.7.0/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href=" {{ asset('DataTables/datatables.min.css')}}"/>
 </head>
 <body>
     <div style="height: 50px; widows: 100%; text-align: center">
@@ -101,7 +102,7 @@
     </div>
     <div class="col-md-8" style="margin-top: 20px;">
         <h4 style="text-align: center">Petty Cash Journal</h4>
-        <table class="table table-bordered container">
+        <table class="table table-bordered container" id="myTable">
             <thead>
               <tr>
                 <th scope="col" rowspan="2">Date</th>
@@ -193,5 +194,20 @@
 </div>
 
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('jquery\jquery-3.6.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('DataTables/datatables.min.js') }}"></script>
+    
+    <script>
+        $(document).ready( function () {
+                $('#myTable').DataTable(
+                    {
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    }
+                );
+}          );
+    </script>
 </body>
 </html>
