@@ -43,6 +43,7 @@
                     {{ __('Log in') }}
                 </x-jet-button>
             </div>
+            <a href="/register"><div class="text-right" style="color: blue;">Create a account</div></a>
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>

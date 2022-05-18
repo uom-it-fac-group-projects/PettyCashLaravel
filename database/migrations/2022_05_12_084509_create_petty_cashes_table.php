@@ -17,6 +17,7 @@ class CreatePettyCashesTable extends Migration
             $table->id();
             $table->date('date');
             $table->string('description');
+            $table->string('voucher_number');
             $table->float('amount', 8, 2);
             $table->string('type');
             $table->timestamps();

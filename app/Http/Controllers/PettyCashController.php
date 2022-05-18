@@ -43,6 +43,7 @@ class PettyCashController extends Controller
         $request->validate([
             'date' => 'required',
             'description' => 'required| max:20',
+            'voucher_number' => 'required| max:10',
             'amount' => 'required',
             'type' => 'required',
         ]);

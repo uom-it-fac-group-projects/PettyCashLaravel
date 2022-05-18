@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PettyCash extends Model
 {
     protected $fillable = [
-        'date', 'description', 'amount', 'type',
+        'date', 'description', 'amount', 'type', 'voucher_number',
     ];
 
     use HasFactory;

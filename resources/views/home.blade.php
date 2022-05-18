@@ -61,7 +61,7 @@
                 <span style="color: red">@error('date')
                     {{$message}}
                 @enderror</span>
-              </div>
+            </div>
               <div  class="mb-3">
                 <label for="description">Description</label>
 
@@ -70,6 +70,16 @@
                     {{$message}}
                 @enderror</span>
               </div>
+
+              <div class="mb-3">
+                <label for="voucher_number" class="form-label">Voucher Number</label>
+                <input type="text" name="voucher_number" class="form-control" id="voucher_number" aria-describedby="emailHelp">
+                <span style="color: red">@error('voucher_number')
+                    {{$message}}
+                @enderror</span>
+              </div>
+
+
             <div class="mb-3">
               <label for="amount" class="form-label">Amount</label>
               <input type="number" class="form-control" name="amount" id="amount" aria-describedby="emailHelp">
@@ -126,7 +136,7 @@
               <tr>
                     <td>{{$transaction->date}}</td>
                     <td>{{$transaction->description}}</td>
-                    <td></td>
+                    <td>{{$transaction->voucher_number}}</td>
                     <td>{{number_format((float)$transaction->amount, 2, '.', '')}}</td>
 
                     <td>
@@ -220,11 +230,13 @@
                         dom: 'Bfrtip',
                         buttons: [
                             'copy', 'csv', 'excel', 'pdf', 'print'
-                        ]
+                        ],
+                        "bSort": false
                     }
                 );
 
                 $("#showFloatBtn").click(function () {
+                    console.log('hii');
                     $("#showFloatBtn").hide();
                     $("#floatValue").show();
                 });
