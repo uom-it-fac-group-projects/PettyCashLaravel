@@ -33,7 +33,7 @@
         @if($imprest_amount != null)
         <div class="container w-75 p-4 mb-3 text-center" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
             <div >Imprest Amount</div>
-            <div class="text-success " style="font-size: 30px">{{$imprest_amount}}</div>
+            <div class="text-success " style="font-size: 30px">{{number_format((float)$imprest_amount, 2, '.', '')}}</div>
         </div>
         @else
         
@@ -187,7 +187,7 @@
             <div class="col-md-6">
                 <div class="container w-75 p-4 mb-3 text-center" style="background-color: rgb(232, 232, 232); border-radius: 15px;margin: 5px;">
                     <div >Balance</div>
-                    <div class="text-success " style="font-size: 30px">{{$imprest_amount - $amountTotal}}</div>
+                    <div class="text-success " style="font-size: 30px">{{number_format((float)$imprest_amount - $amountTotal, 2, '.', '')}}</div>
                 </div>
             </div>
 
@@ -195,7 +195,7 @@
                 <div class="container w-75 p-4 mb-3 text-center" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
                     <div >Reimbursement Amount</div>
                     <div class="btn btn-success" id="showFloatBtn" style="font-size: 20px">Show</div>
-                    <div class="text-success " id="floatValue" style="font-size: 30px">{{$amountTotal}}</div>
+                    <div class="text-success " id="floatValue" style="font-size: 30px">{{number_format((float)$amountTotal, 2, '.', '')}}</div>
                 </div>
             </div>
         </div>
