@@ -184,12 +184,27 @@
             <div class="col-md-6" >
                 <div class="container w-75 p-4 mb-3 text-center" style="background-color: rgb(232, 232, 232); border-radius: 15px;">
                     <div >Petty Cash Float</div>
-                    <div class="text-success " style="font-size: 30px">{{$amountTotal}}</div>
+                    <div class="btn btn-success" id="showFloatBtn" style="font-size: 20px">Show</div>
+                    <div class="text-success " id="floatValue" style="font-size: 30px">{{$amountTotal}}</div>
                 </div>
             </div>
         </div>
-        <div style="position: absolute;right: 0px;">
-            <a href="/db/clear"><div class="btn btn-primary"> Reset all </div></a>
+        <div class="row" style="position: absolute;right: 0px;">
+            <div class="col">
+                <a href="/db/clear"><div class="btn btn-primary"> Reset </div></a>
+             </div>
+
+             <div class="col">
+                <a href="{{ route('profile.show') }}"><div class="btn btn-secondary"> Profile </div></a>
+             </div>
+
+             <div class="col">
+                <form method="POST" action="{{ route('logout') }}" x-data>
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Logout"/>
+                </form> 
+             </div>
+             
         </div>
 </div>
 
@@ -199,6 +214,7 @@
     
     <script>
         $(document).ready( function () {
+            $("#floatValue").hide();
                 $('#myTable').DataTable(
                     {
                         dom: 'Bfrtip',
@@ -207,7 +223,12 @@
                         ]
                     }
                 );
-}          );
+
+                $("#showFloatBtn").click(function () {
+                    $("#showFloatBtn").hide();
+                    $("#floatValue").show();
+                });
+        });
     </script>
 </body>
 </html>

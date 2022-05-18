@@ -27,3 +27,13 @@ Route::get('delete/{id}', [PettyCashController::class,'delete']);
 Route::post('imprest/store', [ImprestController::class,'store']);
 
 Route::get('db/clear', [PettyCashController::class,'deleteDB']);
+
+
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/', [PettyCashController::class,'index'])->name('dashboard');
+});
